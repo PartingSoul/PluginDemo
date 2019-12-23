@@ -1,5 +1,6 @@
 package com.parting_soul.function;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -16,6 +17,8 @@ public class SecondActivity extends BaseActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_second);
+
+        startService(new Intent(mHostActivity, PluginService.class));
     }
 
 }

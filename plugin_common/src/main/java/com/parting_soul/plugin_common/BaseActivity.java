@@ -2,6 +2,7 @@ package com.parting_soul.plugin_common;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,6 +79,11 @@ public class BaseActivity extends AppCompatActivity implements ActivityInterface
     @Override
     public void startActivity(Intent intent, @Nullable Bundle options) {
         mHostActivity.startActivity(intent, options);
+    }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        return mHostActivity.startService(service);
     }
 
     @Override

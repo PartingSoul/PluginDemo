@@ -1,5 +1,6 @@
 package com.parting_soul.plugindemo;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -45,11 +46,16 @@ public class ProxyPluginActivity extends AppCompatActivity {
 
     @Override
     public void startActivity(Intent intent, @Nullable Bundle options) {
-        Class targetClass = intent.getClass();
-
         Intent newIntent = new Intent(this, ProxyPluginActivity.class);
-        newIntent.putExtra(EXTRA_CLASS_NAME, targetClass.getCanonicalName());
+        newIntent.putExtra(EXTRA_CLASS_NAME, intent.getComponent().getClassName());
         super.startActivity(newIntent, options);
+    }
+
+    @Override
+    public ComponentName startService(Intent service) {
+        Intent newIntent = new Intent(this, ProxyService.class);
+        newIntent.putExtra(ProxyService.EXTRA_SERVICE_CLASSNAME, service.getComponent().getClassName());
+        return super.startService(newIntent);
     }
 
 }

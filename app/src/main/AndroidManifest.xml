@@ -19,6 +19,8 @@
         <activity
             android:name=".ProxyPluginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <service android:name=".ProxyService" />
     </application>
 
 </manifest>
