@@ -1,7 +1,9 @@
 package com.parting_soul.function;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +17,8 @@ import com.parting_soul.plugin_common.BaseActivity;
  * @date 2019-12-20
  */
 public class FunctionActivity extends BaseActivity {
+    public static final String ACTION_BROAD = "com.parting_soul.function.plugin_broadcast";
+    private BroadcastReceiver mReceiver;
 
     @Override
     public void inject(Activity activity) {
@@ -32,6 +36,20 @@ public class FunctionActivity extends BaseActivity {
                 .setOnClickListener(v ->
                         startActivity(new Intent(mHostActivity, SecondActivity.class))
                 );
+
+        mReceiver = new PluginBroadcastReceiver();
+        registerReceiver(mReceiver, new IntentFilter(ACTION_BROAD));
+
+        //发送广播
+        Intent intent = new Intent(ACTION_BROAD);
+        sendBroadcast(intent);
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
     }
 
 }

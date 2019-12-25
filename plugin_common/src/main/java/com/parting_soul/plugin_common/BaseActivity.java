@@ -2,9 +2,11 @@ package com.parting_soul.plugin_common;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +89,24 @@ public class BaseActivity extends AppCompatActivity implements ActivityInterface
     }
 
     @Override
+    public void sendBroadcast(Intent intent) {
+        mHostActivity.sendBroadcast(intent);
+    }
+
+
+    @Override
+    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter) {
+        return mHostActivity.registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void unregisterReceiver(BroadcastReceiver receiver) {
+        mHostActivity.unregisterReceiver(receiver);
+    }
+
+    @Override
     public <T extends View> T findViewById(int id) {
         return mHostActivity.findViewById(id);
     }
+
 }
